@@ -26,14 +26,12 @@ class LFSR {
             boolean zeroBit = (stateOfRegister[lenOfRegister - 1] ^ stateOfRegister[regBit]);
             boolean nextKeyBit = stateOfRegister[lenOfRegister - 1];
             keyBits.append(nextKeyBit ? '1' : '0');
-//            System.out.println(keyBit ? '1' : '0');
+
             for (int i = lenOfRegister - 1; i > 0; i--) {
                 stateOfRegister[i] = stateOfRegister[i - 1];
             }
 
             stateOfRegister[0] = zeroBit;
-//            for (int i = lenOfRegister - 1; i > -1; i--) System.out.print(stateOfRegister[i] ? 1 : 0);
-//            System.out.println();
         }
         return keyBits;
     }

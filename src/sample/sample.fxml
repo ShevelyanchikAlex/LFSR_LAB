@@ -17,9 +17,9 @@
         </Menu>
     </MenuBar>
     <TextField fx:id="inputRegisterStateTextField" layoutX="239.0" layoutY="58.0" prefHeight="26.0" prefWidth="314.0" promptText="Enter the key state" />
-    <TextArea fx:id="generatedKeyBitsTextArea" layoutX="33.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The generated key will be here" wrapText="true" />
-    <TextArea fx:id="inputFileBitsTextArea" layoutX="285.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The input file bits will be here" wrapText="true" />
-    <TextArea fx:id="resultBitsTextArea" layoutX="538.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The result bits will be here" wrapText="true" />
+    <TextArea fx:id="generatedKeyBitsTextArea" editable="false" layoutX="33.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The generated key will be here" wrapText="true" />
+    <TextArea fx:id="inputFileBitsTextArea" editable="false" layoutX="285.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The input file bits will be here" wrapText="true" />
+    <TextArea fx:id="resultBitsTextArea" editable="false" layoutX="538.0" layoutY="147.0" prefHeight="385.0" prefWidth="230.0" promptText="The result bits will be here" wrapText="true" />
     <Button fx:id="encryptDecryptBtn" layoutX="300.0" layoutY="552.0" mnemonicParsing="false" onAction="#encryptDecrypt" prefHeight="26.0" prefWidth="200.0" text="Encrypt/Decrypt" />
     <Text layoutX="362.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input file bits" />
     <Text layoutX="88.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generated key bits" />

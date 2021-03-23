@@ -4,10 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.function.UnaryOperator;
 
 public class Controller {
 
@@ -26,6 +28,7 @@ public class Controller {
     @FXML
     void initialize() {
         addTextLimiter(inputRegisterStateTextField, 29);
+        inputRegisterStateTextField.setTextFormatter(new TextFormatter<>(filter));
     }
 
     @FXML
@@ -54,15 +57,38 @@ public class Controller {
         });
     }
 
+    private UnaryOperator<TextFormatter.Change> filter = new UnaryOperator<TextFormatter.Change>() {
+
+        @Override
+        public TextFormatter.Change apply(TextFormatter.Change t) {
+
+            if (t.isReplaced())
+                if (t.getText().matches("[^0-1]"))
+                    t.setText(t.getControlText().substring(t.getRangeStart(), t.getRangeEnd()));
+
+            if (t.isAdded()) {
+                if (t.getText().matches("[^0-1]")) {
+                    t.setText("");
+                }
+            }
+            return t;
+        }
+    };
+
 
     private void encryptDecryptMethod() {
         String keyState = getOnlyBits(inputRegisterStateTextField.getText());
         if (keyState.length() != 29) {
-            showAlertMessage("Incorrect input of the key register state", "The length of the register blocks is not equal 29");
+            showAlertMessage("Incorrect input of the key", "The length of the key is not equal 29!");
         } else {
-            generatedKeyBitsTextArea.clear();
-            StringBuilder keyBits = generateKeyBits(keyState);
-            encryptDecryptFileBits(keyBits);
+            if (inputFileBitsTextArea.getLength() != 0) {
+                generatedKeyBitsTextArea.clear();
+                StringBuilder keyBits = generateKeyBits(keyState);
+                encryptDecryptFileBits(keyBits);
+            } else {
+                showAlertMessage("Error", "Input file bits textArea is empty!");
+            }
+
         }
     }
 
